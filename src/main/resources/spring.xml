@@ -18,7 +18,7 @@
         <!-- 配置连接池属性 -->
         <property name="driverClass" value="${jdbc.driver}"/>
         <property name="jdbcUrl" value="${mysql.url}"/>
-        <property name="user" value="${mysql.password}"/>
+        <property name="user" value="${mysql.username}"/>
         <property name="password" value="${mysql.password}"/>
     </bean>
 

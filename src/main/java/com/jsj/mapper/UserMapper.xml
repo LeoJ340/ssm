@@ -10,6 +10,16 @@
         <include refid="condition"/>
     </select>
 
+    <!--新增-->
+    <insert id="insertUser" parameterType="User">
+        insert  into user (name,sex,age,`tel-number`) value (#{name},#{sex},#{age},#{telNumber})
+    </insert>
+
+    <!--删除-->
+    <delete id="deleteUser" parameterType="Integer">
+        delete from user where id = #{id}
+    </delete>
+
     <!--条件语句-->
     <sql id="condition">
         <where>
