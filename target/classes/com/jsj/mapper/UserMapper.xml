@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jsj.mapper.UserMapper">
+
+    <!--查询-->
+    <select id="getUser" parameterType="User" resultMap="userResultMap">
+        select * from user
+        <include refid="condition"/>
+    </select>
+
+    <!--条件语句-->
+    <sql id="condition">
+        <where>
+            <if test="id!=null">
+                and id = #{id}
+            </if>
+            <if test="name!=null">
+                and name = #{name}
+            </if>
+            <if test="sex!=null">
+                and sex = #{sex}
+            </if>
+            <if test="age!=null">
+                and age = #{age}
+            </if>
+            <if test="telNumber!=null">
+                and telNumber = #{telNumber}
+            </if>
+        </where>
+    </sql>
+
+    <!--结果集映射-->
+    <resultMap id="userResultMap" type="User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="sex" column="sex"/>
+        <result property="telNumber" column="tel-number"/>
+    </resultMap>
+
+</mapper>

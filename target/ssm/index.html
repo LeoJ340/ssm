@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息管理系统</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+<header class="container-fluid bg-dark text-center text-white p-3">
+    <h3>用户信息管理系统</h3>
+</header>
+<div class="container">
+    <div class="form-inline select">
+        <div class="input-group">
+            <label>姓名：</label>
+            <label>
+                <input type="text" class="form-control">
+            </label>
+        </div>
+        <button type="button" class="btn btn-primary">查询</button>
+        <button type="button" class="btn btn-danger">重置</button>
+    </div>
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-primary">新增</button>
+        <button type="button" class="btn btn-danger">批量删除</button>
+    </div>
+    <table class="table table-bordered table-hover text-center mt-2">
+        <thead>
+        <tr>
+            <th></th>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>联系电话</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <!--数据列表-->
+        <tbody id="tbody"></tbody>
+    </table>
+</div>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

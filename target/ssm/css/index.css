@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.select{
+    margin-top: 50px;
+    font-weight: 700;
+}
+.btn{
+    margin: 15px;
+}
