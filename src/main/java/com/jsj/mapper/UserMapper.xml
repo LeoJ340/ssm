@@ -15,6 +15,11 @@
         insert  into user (name,sex,age,`tel-number`) value (#{name},#{sex},#{age},#{telNumber})
     </insert>
 
+    <!--修改-->
+    <update id="updateUser" parameterType="User">
+        update user set name = #{name} , sex = #{sex} , age = #{age} , `tel-number` = #{telNumber} where id = #{id}
+    </update>
+
     <!--删除-->
     <delete id="deleteUser" parameterType="Integer">
         delete from user where id = #{id}

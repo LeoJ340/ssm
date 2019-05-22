@@ -4,28 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jsj.mapper.UserMapper">
 
-    <!--增-->
-<!--    <insert id="insertUser" parameterType="User">-->
-<!--        insert into user (id,username,password)-->
-<!--        value (#{id},#{username},#{password})-->
-<!--    </insert>-->
-
-    <!--删-->
-<!--    <delete id="deleteUser" parameterType="User">-->
-<!--        delete from user-->
-<!--        <include refid="condition"/>-->
-<!--    </delete>-->
-
-    <!--改-->
-<!--    <update id="updateUser" parameterType="User">-->
-<!--        update user SET password = #{password} where username = #{username}-->
-<!--    </update>-->
-
-    <!--查-->
+    <!--查询-->
     <select id="getUser" parameterType="User" resultMap="userResultMap">
         select * from user
         <include refid="condition"/>
     </select>
+
+    <!--新增-->
+    <insert id="insertUser" parameterType="User">
+        insert  into user (name,sex,age,`tel-number`) value (#{name},#{sex},#{age},#{telNumber})
+    </insert>
+
+    <!--修改-->
+    <update id="updateUser" parameterType="User">
+        update user set name = #{name} , sex = #{sex} , age = #{age} , `tel-number` = #{telNumber} where id = #{id}
+    </update>
+
+    <!--删除-->
+    <delete id="deleteUser" parameterType="Integer">
+        delete from user where id = #{id}
+    </delete>
 
     <!--条件语句-->
     <sql id="condition">

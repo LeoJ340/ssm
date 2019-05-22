@@ -25,10 +25,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, Object> insertUser(User user) {
         Map<String,Object> msg = new HashMap<>();
-        try {
-            dao.insertUser(user);
+        if (dao.insertUser(user)>0){
             msg.put("success",true);
-        }catch (Exception e){
+        }else {
             msg.put("success",false);
         }
         return msg;
@@ -37,10 +36,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, Object> deleteUser(Integer id) {
         Map<String,Object> msg = new HashMap<>();
-        try {
-            dao.deleteUser(id);
+        if (dao.deleteUser(id)>0){
             msg.put("success",true);
-        }catch (Exception e){
+        }else {
+            msg.put("success",false);
+        }
+        return msg;
+    }
+
+    @Override
+    public Map<String, Object> updateUser(User user) {
+        Map<String,Object> msg = new HashMap<>();
+        if (dao.updateUser(user)>0){
+            msg.put("success",true);
+        }else {
             msg.put("success",false);
         }
         return msg;

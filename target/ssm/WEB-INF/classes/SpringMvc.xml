@@ -28,10 +28,4 @@
     <!--自动扫描包-->
     <context:component-scan base-package="com.jsj.controller"/>
 
-    <!-- 配置springmvc的视图解析器 -->
-<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-<!--        <property name="prefix" value="/WEB-INF/"/>-->
-<!--        <property name="suffix" value=".html"/>-->
-<!--    </bean>-->
-
 </beans>

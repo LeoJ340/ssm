@@ -14,4 +14,6 @@ public interface UserService {
     Map<String,Object> insertUser(User user);
 
     Map<String,Object> deleteUser(Integer id);
+
+    Map<String,Object> updateUser(User user);
 }

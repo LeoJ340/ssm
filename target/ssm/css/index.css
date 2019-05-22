@@ -2,10 +2,16 @@
     margin: 0;
     padding: 0;
 }
+a{
+    cursor: pointer;
+}
 .select{
     margin-top: 50px;
     font-weight: 700;
 }
 .btn{
-    margin: 15px;
+    margin-left: 10px;
+}
+.iconfont{
+    font-size: 18px;
 }

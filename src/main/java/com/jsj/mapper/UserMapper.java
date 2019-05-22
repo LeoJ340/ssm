@@ -4,12 +4,13 @@ import com.jsj.bean.User;
 
 import java.util.List;
 
-
 public interface UserMapper {
 
     List<User> getUser(User user);
 
-    void insertUser(User user);
+    int insertUser(User user);
 
-    void deleteUser(Integer id);
+    int deleteUser(Integer id);
+
+    int updateUser(User user);
 }

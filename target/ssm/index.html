@@ -16,15 +16,14 @@
         <div class="input-group">
             <label>姓名：</label>
             <label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" id="name">
             </label>
         </div>
-        <button type="button" class="btn btn-primary">查询</button>
-        <button type="button" class="btn btn-danger">重置</button>
+        <button type="button" class="btn btn-info" onclick="select()">查询</button>
     </div>
     <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-primary">新增</button>
-        <button type="button" class="btn btn-danger">批量删除</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertModal">新增</button>
+        <button type="button" class="btn btn-danger" onclick="allDelete()">批量删除</button>
     </div>
     <table class="table table-bordered table-hover text-center mt-2">
         <thead>
@@ -42,7 +41,96 @@
         <tbody id="tbody"></tbody>
     </table>
 </div>
-
+<!-- 新增模态框 -->
+<div class="modal fade" id="insertModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">新增用户</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="insert_data">
+                    <div class="form-group">
+                        <label>
+                            <input type="email" class="form-control" placeholder="姓名" name="name">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" name="sex" value="男">男
+                        </label>
+                        <label>
+                            <input type="radio" name="sex" value="女">女
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="number" class="form-control" placeholder="年龄" name="age">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" placeholder="联系电话" name="telNumber">
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="insert()">添加</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑模态框 -->
+<div class="modal fade" id="updateModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">编辑用户</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="update_data">
+                    <div class="form-group">
+                        <label>
+                            编号：
+                            <input type="text" name="id" disabled>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="email" class="form-control" placeholder="姓名" name="name">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" name="sex" value="男">男
+                        </label>
+                        <label>
+                            <input type="radio" name="sex" value="女">女
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="number" class="form-control" placeholder="年龄" name="age">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="text" class="form-control" placeholder="联系电话" name="telNumber">
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="update()">修改</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 <script src="js/index.js"></script>

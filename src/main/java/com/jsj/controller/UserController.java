@@ -33,4 +33,9 @@ public class UserController {
     public Map<String,Object> delete(Integer id){
         return userService.deleteUser(id);
     }
+
+    @RequestMapping(value = "update.do",method = RequestMethod.POST)
+    public Map<String,Object> update(User user){
+        return userService.updateUser(user);
+    }
 }
