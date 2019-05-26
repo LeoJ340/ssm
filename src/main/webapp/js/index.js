@@ -1,30 +1,31 @@
-// 页面加载玩执行
-window.onload=function () {
-    getData();
-};
-// 初始化/刷新数据列表
-function getData(){
+// 定义全局变量
+var pageSize=3;
+var beginIndex=1;
+getPageData(beginIndex,pageSize,null);
+// 分页查询
+function getPageData(pageIndex,pageSize,selectParams) {
+    var pageParams={
+        pageIndex:pageIndex,
+        pageSize:pageSize
+    };
+    var params = $.extend(pageParams,selectParams);
     $.ajax({
-        url:"/user/users.do",
+        url:"/user/userpage.do",
         type:"post",
+        data:params,
         success:function (response) {
-            showData(response);
+            showData(response.beanList);
+            appendPage(response.pageIndex, response.totalPage, 3);
         }
     });
 }
-// 查询
+// 条件查询
 function select() {
     var name = $("#name").val();
-    $.ajax({
-        url:"/user/users.do",
-        type:"post",
-        data:{
-            name:name
-        },
-        success:function (response) {
-            showData(response);
-        }
-    });
+    var selectParams={
+        name:name
+    };
+    getPageData(1,3,selectParams);
 }
 // 新增
 function insert() {
@@ -36,7 +37,7 @@ function insert() {
         success:function (response) {
             if (response.success){
                 alert("添加成功！");
-                getData();
+                getPageData(1,3);
                 $('#insertModal').modal('hide');
             } else {
                 alert("添加失败！");
@@ -143,4 +144,63 @@ function showData(response) {
             "</tr>"
     });
     tbody.html(content);
+}
+// 拼接分页条(页码,总页数,缩进页数)
+function appendPage(pageIndex, totalPage, len_size) {
+    var html = '';
+    // 上一页
+    html += '<li class="page-item" data-option="' + (pageIndex - 1) + '">' +
+        '<a class="page-link" href="javascript:void(0);" aria-label="Previous">' +
+        '<span aria-hidden="true">&laquo;</span>' +
+        '</a>' +
+        '</li>';
+    if ((pageIndex - len_size - 1) > 0) {
+        html += '<li class="page-item" data-option="' + (pageIndex - len_size - 1) + '">' +
+            '<a class="page-link" href="javascript:void(0);">...</a>' +
+            '</li>';
+    }
+    for (var i = len_size; i > 0; i--) {
+        if (pageIndex - i > 0) {
+            html += '<li class="page-item" data-option="' + (pageIndex - i) + '">' +
+                '<a class="page-link" href="javascript:void(0);">' + (pageIndex - i) + '</a>' +
+                '</li>';
+        }
+    }
+    html += '<li class="page-item active" data-option="' + pageIndex + '">' +
+        '<a class="page-link" href="javascript:void(0);">' + pageIndex + '</a>' +
+        '</li>';
+    for (var i = 1; i <= len_size; i++) {
+        if (pageIndex + i <= totalPage) {
+            html += '<li class="page-item" data-option="' + (pageIndex + i) + '">' +
+                '<a class="page-link" href="javascript:void(0);">' + (pageIndex + i) + '</a>' +
+                '</li>';
+        }
+    }
+    if ((pageIndex + len_size + 1) <= totalPage) {
+        html += '<li class="page-item" data-option="' + (pageIndex + len_size + 1) + '">' +
+            '<a class="page-link" href="javascript:void(0);">...</a>' +
+            '</li>';
+    }
+    // 下一页
+    html += '<li class="page-item" data-option="' + (pageIndex + 1) + '">' +
+        '<a class="page-link" href="javascript:void(0);" aria-label="Next">' +
+        '<span aria-hidden="true">&raquo;</span>' +
+        '</a>' +
+        '</li>';
+    $("#pager").html(html);
+    // 第一页时禁用上一页
+    if (pageIndex === 1) {
+        $("#pager li:first").addClass("disabled");
+    }
+    // 最后一页时禁用下一页
+    if (pageIndex === totalPage) {
+        $("#pager li:last").addClass("disabled");
+    }
+    // 分页点击事件
+    $("#pager li").click(function() {
+        if ($(this).hasClass('disabled') || $(this).hasClass('active')) {
+            return;
+        }
+        getPageData($(this).attr("data-option"), pageSize,null);
+    });
 }
