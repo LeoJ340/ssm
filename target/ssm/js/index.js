@@ -1,23 +1,34 @@
 // 定义全局变量
 var pageSize=3;
-var beginIndex=3;
-getPageData(beginIndex,pageSize,null);
+var beginIndex=1;
+window.onload=function () {
+    getPageData(beginIndex,pageSize,null);
+};
 // 分页查询
 function getPageData(pageIndex,pageSize,selectParams) {
-    var pageParams={
-        pageIndex:pageIndex,
-        pageSize:pageSize
-    };
-    var params = $.extend(pageParams,selectParams);
-    $.ajax({
-        url:"/user/userpage.do",
-        type:"post",
-        data:params,
-        success:function (response) {
-            showData(response.beanList);
-            appendPage(response.pageIndex, response.totalPage, 3);
-        }
-    });
+    if (pageIndex<beginIndex){
+        alert("页码无效");
+    } else {
+        var pageParams={
+            pageIndex:pageIndex,
+            pageSize:pageSize
+        };
+        var params = $.extend(pageParams,selectParams);
+        $.ajax({
+            url:"/user/userpage.do",
+            type:"post",
+            data:params,
+            success:function (response) {
+                if (pageIndex>response.totalPage) {
+                    alert("页码无效");
+                }else {
+                    console.log(response);
+                    showData(response.beanList);
+                    appendPage(response.pageIndex, response.totalPage, 2);
+                }
+            }
+        });
+    }
 }
 // 条件查询
 function select() {
@@ -37,7 +48,7 @@ function insert() {
         success:function (response) {
             if (response.success){
                 alert("添加成功！");
-                getPageData(1,3);
+                getPageData(beginIndex,pageSize,null);
                 $('#insertModal').modal('hide');
             } else {
                 alert("添加失败！");
@@ -59,7 +70,7 @@ function DeleteOne(id) {
             success:function (response) {
                 if (response.success){
                     alert("删除成功！");
-                    getData();
+                    getPageData(beginIndex,pageSize,null);
                 } else {
                     alert("删除失败！");
                 }
@@ -88,7 +99,7 @@ function allDelete() {
         });
         if (deleteRes) {
             alert("删除成功！");
-            getData();
+            getPageData(beginIndex,pageSize,null);
         }else {
             alert("删除失败！");
         }
@@ -113,13 +124,18 @@ function update() {
         success:function (response) {
             if (response.success){
                 alert("修改成功！");
-                getData();
+                getPageData(beginIndex,pageSize,null);
                 $('#updateModal').modal('hide');
             } else {
                 alert("修改失败！");
             }
         }
     });
+}
+// 页码跳转
+function toPage() {
+    var toPageIndex = $("#toPageIndex").val();
+    getPageData(toPageIndex,pageSize,null);
 }
 // 封装渲染数据列表方法
 function showData(response) {
@@ -145,55 +161,58 @@ function showData(response) {
     });
     tbody.html(content);
 }
-// 拼接分页条(页码,总页数,缩进页数)
-function appendPage(pageIndex, pageTotal, len_size) {
+// 拼接分页条(页码,总页数,最大显示分页数/2)
+function appendPage(pageIndex, totalPage, length_size) {
     var html = '';
-    // 上一页
-    html += '<li class="page-item" data-option="' + (pageIndex - 1) + '">' +
-        '<a class="page-link" href="javascript:void(0);" aria-label="Previous">' +
-        '<span aria-hidden="true">&laquo;</span>' +
-        '</a>' +
+    // 首页
+    html += '<li class="page-item" data-option="' + (beginIndex) + '">' +
+        '<a class="page-link" href="javascript:void(0);">首页</a>' +
         '</li>';
-    if ((pageIndex - len_size - 1) > 0) {
-        html += '<li class="page-item" data-option="' + (pageIndex - len_size - 1) + '">' +
-            '<a class="page-link" href="javascript:void(0);">...</a>' +
+    // 上一页
+    if (pageIndex!==beginIndex){
+        html += '<li class="page-item" data-option="' + (pageIndex - 1) + '">' +
+            '<a class="page-link" href="javascript:void(0);" aria-label="Previous">' +
+            '<span aria-hidden="true">&laquo;</span>' +
+            '</a>' +
             '</li>';
     }
-    for (var i = len_size; i > 0; i--) {
+    for (var i = length_size; i > 0; i--) {
         if (pageIndex - i > 0) {
             html += '<li class="page-item" data-option="' + (pageIndex - i) + '">' +
                 '<a class="page-link" href="javascript:void(0);">' + (pageIndex - i) + '</a>' +
                 '</li>';
         }
     }
+    // 当前页码
     html += '<li class="page-item active" data-option="' + pageIndex + '">' +
         '<a class="page-link" href="javascript:void(0);">' + pageIndex + '</a>' +
         '</li>';
-    for (var i = 1; i <= len_size; i++) {
-        if (pageIndex + i <= pageTotal) {
-            html += '<li class="page-item" data-option="' + (pageIndex + i) + '">' +
-                '<a class="page-link" href="javascript:void(0);">' + (pageIndex + i) + '</a>' +
+    for (var j = 1; j <= length_size; j++) {
+        if (pageIndex + j <= totalPage) {
+            html += '<li class="page-item" data-option="' + (pageIndex + j) + '">' +
+                '<a class="page-link" href="javascript:void(0);">' + (pageIndex + j) + '</a>' +
                 '</li>';
         }
     }
-    if ((pageIndex + len_size + 1) <= pageTotal) {
-        html += '<li class="page-item" data-option="' + (pageIndex + len_size + 1) + '">' +
-            '<a class="page-link" href="javascript:void(0);">...</a>' +
+    // 下一页
+    if (pageIndex!==totalPage){
+        html += '<li class="page-item" data-option="' + (pageIndex + 1) + '">' +
+            '<a class="page-link" href="javascript:void(0);" aria-label="Next">' +
+            '<span aria-hidden="true">&raquo;</span>' +
+            '</a>' +
             '</li>';
     }
-    // 下一页
-    html += '<li class="page-item" data-option="' + (pageIndex + 1) + '">' +
-        '<a class="page-link" href="javascript:void(0);" aria-label="Next">' +
-        '<span aria-hidden="true">&raquo;</span>' +
-        '</a>' +
+    // 尾页
+    html += '<li class="page-item" data-option="' + (totalPage) + '">' +
+        '<a class="page-link" href="javascript:void(0);">尾页</a>' +
         '</li>';
     $("#pager").html(html);
-    // 第一页时禁用上一页
+    // 第一页时禁用首页
     if (pageIndex === 1) {
         $("#pager li:first").addClass("disabled");
     }
-    // 最后一页时禁用下一页
-    if (pageIndex === pageTotal) {
+    // 最后一页时禁用尾页
+    if (pageIndex === totalPage) {
         $("#pager li:last").addClass("disabled");
     }
     // 分页点击事件

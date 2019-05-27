@@ -24,7 +24,7 @@ function getPageData(pageIndex,pageSize,selectParams) {
                 }else {
                     console.log(response);
                     showData(response.beanList);
-                    appendPage(response.pageIndex, response.totalPage, 3);
+                    appendPage(response.pageIndex, response.totalPage, 2);
                 }
             }
         });
@@ -161,54 +161,57 @@ function showData(response) {
     });
     tbody.html(content);
 }
-// 拼接分页条(页码,总页数,缩进页数)
-function appendPage(pageIndex, totalPage, len_size) {
+// 拼接分页条(页码,总页数,最大显示分页数/2)
+function appendPage(pageIndex, totalPage, length_size) {
     var html = '';
-    // 上一页
-    html += '<li class="page-item" data-option="' + (pageIndex - 1) + '">' +
-        '<a class="page-link" href="javascript:void(0);" aria-label="Previous">' +
-        '<span aria-hidden="true">&laquo;</span>' +
-        '</a>' +
+    // 首页
+    html += '<li class="page-item" data-option="' + (beginIndex) + '">' +
+        '<a class="page-link" href="javascript:void(0);">首页</a>' +
         '</li>';
-    if ((pageIndex - len_size - 1) > 0) {
-        html += '<li class="page-item" data-option="' + (pageIndex - len_size - 1) + '">' +
-            '<a class="page-link" href="javascript:void(0);">...</a>' +
+    // 上一页
+    if (pageIndex!==beginIndex){
+        html += '<li class="page-item" data-option="' + (pageIndex - 1) + '">' +
+            '<a class="page-link" href="javascript:void(0);" aria-label="Previous">' +
+            '<span aria-hidden="true">&laquo;</span>' +
+            '</a>' +
             '</li>';
     }
-    for (var i = len_size; i > 0; i--) {
+    for (var i = length_size; i > 0; i--) {
         if (pageIndex - i > 0) {
             html += '<li class="page-item" data-option="' + (pageIndex - i) + '">' +
                 '<a class="page-link" href="javascript:void(0);">' + (pageIndex - i) + '</a>' +
                 '</li>';
         }
     }
+    // 当前页码
     html += '<li class="page-item active" data-option="' + pageIndex + '">' +
         '<a class="page-link" href="javascript:void(0);">' + pageIndex + '</a>' +
         '</li>';
-    for (var i = 1; i <= len_size; i++) {
-        if (pageIndex + i <= totalPage) {
-            html += '<li class="page-item" data-option="' + (pageIndex + i) + '">' +
-                '<a class="page-link" href="javascript:void(0);">' + (pageIndex + i) + '</a>' +
+    for (var j = 1; j <= length_size; j++) {
+        if (pageIndex + j <= totalPage) {
+            html += '<li class="page-item" data-option="' + (pageIndex + j) + '">' +
+                '<a class="page-link" href="javascript:void(0);">' + (pageIndex + j) + '</a>' +
                 '</li>';
         }
     }
-    if ((pageIndex + len_size + 1) <= totalPage) {
-        html += '<li class="page-item" data-option="' + (pageIndex + len_size + 1) + '">' +
-            '<a class="page-link" href="javascript:void(0);">...</a>' +
+    // 下一页
+    if (pageIndex!==totalPage){
+        html += '<li class="page-item" data-option="' + (pageIndex + 1) + '">' +
+            '<a class="page-link" href="javascript:void(0);" aria-label="Next">' +
+            '<span aria-hidden="true">&raquo;</span>' +
+            '</a>' +
             '</li>';
     }
-    // 下一页
-    html += '<li class="page-item" data-option="' + (pageIndex + 1) + '">' +
-        '<a class="page-link" href="javascript:void(0);" aria-label="Next">' +
-        '<span aria-hidden="true">&raquo;</span>' +
-        '</a>' +
+    // 尾页
+    html += '<li class="page-item" data-option="' + (totalPage) + '">' +
+        '<a class="page-link" href="javascript:void(0);">尾页</a>' +
         '</li>';
     $("#pager").html(html);
-    // 第一页时禁用上一页
+    // 第一页时禁用首页
     if (pageIndex === 1) {
         $("#pager li:first").addClass("disabled");
     }
-    // 最后一页时禁用下一页
+    // 最后一页时禁用尾页
     if (pageIndex === totalPage) {
         $("#pager li:last").addClass("disabled");
     }
