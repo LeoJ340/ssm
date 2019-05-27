@@ -41,10 +41,18 @@
         <tbody id="tbody"></tbody>
     </table>
     <!--分页条-->
-    <div class="pager">
+    <div class="pager d-flex">
         <nav aria-label="Page navigation example">
-            <ul class="pagination" id="pager"></ul>
+            <ul class="pagination mb-0" id="pager"></ul>
         </nav>
+        <div class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+                <label>到第</label>
+                <input type="number" class="form-control col-3 text-center" id="toPageIndex">
+                <label>页</label>
+                <button class="btn btn-primary btn-sm" onclick="toPage()">Go!</button>
+            </div>
+        </div>
     </div>
 </div>
 <!-- 新增模态框 -->

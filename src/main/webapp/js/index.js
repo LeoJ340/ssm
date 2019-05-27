@@ -1,23 +1,34 @@
 // 定义全局变量
 var pageSize=3;
 var beginIndex=1;
-getPageData(beginIndex,pageSize,null);
+window.onload=function () {
+    getPageData(beginIndex,pageSize,null);
+};
 // 分页查询
 function getPageData(pageIndex,pageSize,selectParams) {
-    var pageParams={
-        pageIndex:pageIndex,
-        pageSize:pageSize
-    };
-    var params = $.extend(pageParams,selectParams);
-    $.ajax({
-        url:"/user/userpage.do",
-        type:"post",
-        data:params,
-        success:function (response) {
-            showData(response.beanList);
-            appendPage(response.pageIndex, response.totalPage, 3);
-        }
-    });
+    if (pageIndex<beginIndex){
+        alert("页码无效");
+    } else {
+        var pageParams={
+            pageIndex:pageIndex,
+            pageSize:pageSize
+        };
+        var params = $.extend(pageParams,selectParams);
+        $.ajax({
+            url:"/user/userpage.do",
+            type:"post",
+            data:params,
+            success:function (response) {
+                if (pageIndex>response.totalPage) {
+                    alert("页码无效");
+                }else {
+                    console.log(response);
+                    showData(response.beanList);
+                    appendPage(response.pageIndex, response.totalPage, 3);
+                }
+            }
+        });
+    }
 }
 // 条件查询
 function select() {
@@ -37,7 +48,7 @@ function insert() {
         success:function (response) {
             if (response.success){
                 alert("添加成功！");
-                getPageData(1,3);
+                getPageData(beginIndex,pageSize,null);
                 $('#insertModal').modal('hide');
             } else {
                 alert("添加失败！");
@@ -59,7 +70,7 @@ function DeleteOne(id) {
             success:function (response) {
                 if (response.success){
                     alert("删除成功！");
-                    getData();
+                    getPageData(beginIndex,pageSize,null);
                 } else {
                     alert("删除失败！");
                 }
@@ -88,7 +99,7 @@ function allDelete() {
         });
         if (deleteRes) {
             alert("删除成功！");
-            getData();
+            getPageData(beginIndex,pageSize,null);
         }else {
             alert("删除失败！");
         }
@@ -113,13 +124,18 @@ function update() {
         success:function (response) {
             if (response.success){
                 alert("修改成功！");
-                getData();
+                getPageData(beginIndex,pageSize,null);
                 $('#updateModal').modal('hide');
             } else {
                 alert("修改失败！");
             }
         }
     });
+}
+// 页码跳转
+function toPage() {
+    var toPageIndex = $("#toPageIndex").val();
+    getPageData(toPageIndex,pageSize,null);
 }
 // 封装渲染数据列表方法
 function showData(response) {
