@@ -23,17 +23,6 @@ public class Page<T> implements Serializable {
     //每页显示的数据
     private List<T> beanList;
 
-    public Page() {
-    }
-
-    public Page(int pageIndex, int totalPage, int totalCount, int pageSize, List<T> beanList) {
-        this.pageIndex = pageIndex;
-        this.totalPage = totalPage;
-        this.totalCount = totalCount;
-        this.pageSize = pageSize;
-        this.beanList = beanList;
-    }
-
     public int getPageIndex() {
         return pageIndex;
     }

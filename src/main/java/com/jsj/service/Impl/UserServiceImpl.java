@@ -26,6 +26,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public Page getUserPage(User user,int pageIndex, int pageSize) {
 
+        // 设置查询参数
+        Map<String,Object> paramsMap = new HashMap<>();
+        paramsMap.put("id",user.getId());
+        paramsMap.put("name",user.getName());
+        paramsMap.put("sex",user.getSex());
+        paramsMap.put("age",user.getAge());
+        paramsMap.put("telNumber",user.getTelNumber());
+        paramsMap.put("start",(pageIndex - 1) * pageSize);
+        paramsMap.put("size",pageSize);
+        // 返回bean集合
+        List<User> users = userMapper.getUsersByPage(paramsMap);
+
         // 封装分页结果集
         Page<User> userPage = new Page<>();
         userPage.setPageIndex(pageIndex);
@@ -33,20 +45,6 @@ public class UserServiceImpl implements UserService {
         int totalCount = userMapper.getUserTotalCount();
         userPage.setTotalCount(totalCount);
         userPage.setTotalPage((int) Math.ceil((double) totalCount / (double) pageSize));
-
-        // 设置查询参数
-        Map<String,Object> paramsMap = new HashMap<>();
-        if (user!=null){
-            paramsMap.put("id",user.getId());
-            paramsMap.put("name",user.getName());
-            paramsMap.put("sex",user.getSex());
-            paramsMap.put("age",user.getAge());
-            paramsMap.put("telNumber",user.getTelNumber());
-            paramsMap.put("start",(pageIndex - 1) * pageSize);
-            paramsMap.put("size",pageSize);
-        }
-        // 返回bean集合
-        List<User> users = userMapper.getUsersByPage(paramsMap);
         userPage.setBeanList(users);
 
         return userPage;
