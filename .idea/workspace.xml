@@ -6,14 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d39359c7-2d66-4601-b94f-b1a9d8566ffc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jsj/bean/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jsj/bean/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/jsj/bean/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/jsj/bean/Page.class" afterDir="false" />
-    </list>
-    <list id="8ca8ea11-0b5b-455b-a66d-ec6591f63805" name="Revert &quot;commit sql&quot;" comment="Revert &quot;commit sql&quot;&#10;&#10;This reverts commit d43d57fa">
-      <change beforePath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/jsj/service/Impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/ssm/WEB-INF/classes/com/jsj/service/Impl/UserServiceImpl.class" afterDir="false" />
-    </list>
+    <list default="true" id="d39359c7-2d66-4601-b94f-b1a9d8566ffc" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,7 +33,7 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -183,6 +176,13 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="jsj" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ssm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ssm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -375,6 +375,7 @@
       <workItem from="1565169444677" duration="1077000" />
       <workItem from="1565170636209" duration="893000" />
       <workItem from="1565853368415" duration="368000" />
+      <workItem from="1565943213839" duration="279000" />
     </task>
     <task id="LOCAL-00001" summary="完成环境搭建及初始化页面的数据列表">
       <created>1558415066377</created>
@@ -418,7 +419,14 @@
       <option name="project" value="LOCAL" />
       <updated>1559206557650</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="压缩bootstrap">
+      <created>1565943290257</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1565943290257</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -454,12 +462,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92451000" />
+    <option name="totallyTimeSpent" value="92730000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29959786" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3036193" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -477,10 +485,10 @@
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067025" side_tool="true" weight="0.32719547" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" weight="0.32719547" />
+      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.49932975" weight="0.77195466" />
       <window_info anchor="bottom" id="Application Servers" order="14" weight="0.32956153" />
       <window_info anchor="bottom" id="Messages" order="15" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -512,9 +520,9 @@
               <option name="COLUMN_ORDER">
                 <list>
                   <option value="0" />
-                  <option value="1" />
                   <option value="2" />
                   <option value="3" />
+                  <option value="1" />
                 </list>
               </option>
             </State>
@@ -544,7 +552,8 @@
     <MESSAGE value="分页查询" />
     <MESSAGE value="页码跳转" />
     <MESSAGE value="commit sql" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit sql" />
+    <MESSAGE value="压缩bootstrap" />
+    <option name="LAST_COMMIT_MESSAGE" value="压缩bootstrap" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp" />
