@@ -230,4 +230,4 @@
     }
 业务层接受pageIndex(当前页码数)、pageSize(每页显示数)和有可能存在条件的user，将这些参数封装到Map集合里作为sql查询参数查出满足所有条件的User类集合，再查询出user表数据的总条数totalCount，通过Math的ceil方法得到分页的最大页数TotalPage，最后将当前页码数、每页显示数、User类集合、数据总条数和最大页数封装到page分页结果集中。
 # 项目运行截图
-![Image text](https://raw.githubusercontent.com/JsjCode/ssm/master/md_image/index.png)
+![Image text](https://raw.githubusercontent.com/Lionel340/ssm/master/md_image/index.png)
