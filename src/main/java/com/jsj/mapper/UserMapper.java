@@ -7,8 +7,6 @@ import java.util.Map;
 
 public interface UserMapper {
 
-//    List<User> getUser(User user);
-
     // 分页查询
     List<User> getUsersByPage(Map<String,Object> paramsMap);
 

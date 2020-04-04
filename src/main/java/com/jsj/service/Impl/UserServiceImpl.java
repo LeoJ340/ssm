@@ -19,10 +19,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-//    public List<User> getUser(User user){
-//        return userMapper.getUser(user);
-//    }
-
     @Override
     public Page getUserPage(User user,int pageIndex, int pageSize) {
 

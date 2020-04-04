@@ -6,7 +6,6 @@ import com.jsj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -16,11 +15,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-//    @RequestMapping(value = "users.do",method = RequestMethod.POST)
-//    public List<User> get(User user){
-//        return userService.getUser(user);
-//    }
 
     @RequestMapping(value = "userpage.do",method = RequestMethod.POST)
     public Page getUserPage(User user,
